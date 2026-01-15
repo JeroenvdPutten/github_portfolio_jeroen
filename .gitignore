@@ -1,6 +1,1 @@
 project_7k_books/.env
-project_MLflow/mlflow.db
-project_MLflow/mlruns/1/models/m-d5693b123fac40f685a7aa991edb7f0f/artifacts/conda.yaml
-project_MLflow/mlruns/1/models/m-d5693b123fac40f685a7aa991edb7f0f/artifacts/MLmodel
-project_MLflow/mlruns/1/models/m-d5693b123fac40f685a7aa991edb7f0f/artifacts/model.pkl
-project_MLflow/mlruns/1/models/m-d5693b123fac40f685a7aa991edb7f0f/artifacts/python_env.yaml
