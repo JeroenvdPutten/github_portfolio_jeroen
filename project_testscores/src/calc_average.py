@@ -14,3 +14,5 @@ if __name__ == "__main__":
     scores = get_all_scores(5)
     average = calc_average(scores)
     print(f"The average of the highest scores is: {average:.2f}")
+
+# hallo!
