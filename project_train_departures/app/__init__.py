@@ -1,0 +1,1 @@
+"""Train departures application package."""

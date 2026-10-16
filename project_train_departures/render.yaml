@@ -1,0 +1,16 @@
+# In a Render Blueprint, set Blueprint Path to project_train_departures/render.yaml.
+services:
+  - type: web
+    name: haarlem-utrecht-trains
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: project_train_departures
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: NS_API_KEY
+        sync: false
+      - key: APP_MODE
+        value: live
