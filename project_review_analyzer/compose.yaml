@@ -1,0 +1,39 @@
+services:
+  api:
+    build:
+      context: .
+      target: app
+    image: review-analyzer:local
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - model-cache:/cache/huggingface
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 180s
+  dashboard:
+    image: review-analyzer:local
+    command: ["python", "-m", "streamlit", "run", "dashboard.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.maxUploadSize=2", "--browser.gatherUsageStats=false"]
+    environment:
+      API_URL: http://api:8000
+    ports:
+      - "127.0.0.1:8501:8501"
+    depends_on:
+      api:
+        condition: service_healthy
+  tools:
+    profiles: ["tools"]
+    build:
+      context: .
+      target: development
+    image: review-analyzer-dev:local
+    working_dir: /app
+    volumes:
+      - .:/app
+      - model-cache:/cache/huggingface
+    command: ["python", "-m", "pytest", "-q"]
+volumes:
+  model-cache:
